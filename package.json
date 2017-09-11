@@ -1,0 +1,29 @@
+{
+   "name": "tama-web",
+   "version": "0.0.1",
+   "description": "Web client for Tama Yaru",
+   "main": "index.js",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/EmbeddedLinuxGuy/tama-web.git"
+   },
+   "keywords": [
+      "game",
+      "rpg",
+      "roleplaying",
+      "travel"
+   ],
+   "author": "Jesse D Zbikowski",
+   "license": "ISC",
+   "bugs": {
+      "url": "https://github.com/EmbeddedLinuxGuy/tama-web/issues"
+   },
+   "dependencies": {
+      "tama-yaru": "file:../tama",
+      "http": ""
+   },
+   "homepage": "https://github.com/EmbeddedLinuxGuy/tama-web#readme"
+}
