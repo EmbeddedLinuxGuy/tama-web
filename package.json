@@ -23,7 +23,8 @@
    },
    "dependencies": {
       "tama-yaru": "file:../tama",
-      "http": ""
+      "http": "",
+      "querystring": ""
    },
    "homepage": "https://github.com/EmbeddedLinuxGuy/tama-web#readme"
 }
