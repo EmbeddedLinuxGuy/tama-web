@@ -1,5 +1,6 @@
 const http = require('http');
 const qs = require('querystring');
+const tama = require('tama-yaru');
 const port = 3000;
 
 let html_body = String.raw`<html>
@@ -49,15 +50,23 @@ function init() {
 
 const requestHandler = (request, response) => {
     console.log(request.url)
-    if (request.method === 'POST' && request.url === '/test.html') {
+    if (request.method === 'POST') {
 	var body = '';
 	request.on('data', function(chunk) {
 	    body += chunk;
 	});
 	request.on('end', function() {
 	    var data = qs.parse(body);
-	    response.writeHead(200);
-	    response.end(JSON.stringify(data));
+	    if (request.url === '/test.html') {
+		response.writeHead(200);
+		tama.init(response, data.fileName);
+		response.end(JSON.stringify(data));
+	    }
+	    if (request.url == '/next.html') {
+		response.writeHead(200);
+		tama.handle(null);
+		response.end(JSON.stringify(data));
+	    }
 	});
     } else {
 	response.end(html_body);
