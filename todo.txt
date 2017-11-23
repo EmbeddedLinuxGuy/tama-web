@@ -1,10 +1,11 @@
-  9 display result of condition check
   7 Move step into character JSON
   6 Move data into external JSON
 
 done
 
   4 Replace + with string literal interpolation
+ 10 Move response from popup to html div
+  9 display result of condition check
   2 Web: Single-day journey for existing character
   8 Make web endpoint for advancing the day
   5 Save & reload char.json every turn

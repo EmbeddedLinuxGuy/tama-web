@@ -1,8 +1,8 @@
-function alertContents() {
+function displayContents() {
   try {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
       if (httpRequest.status === 200) {
-        alert(httpRequest.responseText);
+          document.getElementById("log").innerHTML = httpRequest.responseText + document.getElementById("log").innerHTML;
       } else {
         alert('There was a problem with the request.');
       }
@@ -21,7 +21,7 @@ function makeRequest() {
       alert('Giving up :( Cannot create an XMLHTTP instance');
       return false;
     }
-    httpRequest.onreadystatechange = alertContents;
+    httpRequest.onreadystatechange = displayContents;
     let url = 'test.html';
 
     httpRequest.open('POST', url);

@@ -23,7 +23,7 @@ const requestHandler = (request, response) => {
 		    tama.init(response, data.fileName);
 		}
 		else {
-		    console.log("Next day!");
+//		    console.log("Next day!");
 		    tama.handle(null, response);
 		}
 		response.end(JSON.stringify(data));
