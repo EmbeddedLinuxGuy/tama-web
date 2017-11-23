@@ -1,0 +1,12 @@
+  2 Web: Single-day journey for existing character
+  4 Replace + with string literal interpolation
+  7 Move step into character JSON
+  6 Move data into external JSON
+  
+done
+
+  8 Make web endpoint for advancing the day
+  5 Save & reload char.json every turn
+  1 retrieve POST body from XmlHttpRequest
+  3 Add number of days journeyed to char.json
+  
