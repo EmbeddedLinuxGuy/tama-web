@@ -5,6 +5,7 @@ const port = 3000;
 const fs =require("fs");
 
 let html_body = fs.readFileSync("index.html");
+var step = 0;
 
 const requestHandler = (request, response) => {
     console.log(request.url)
@@ -21,10 +22,15 @@ const requestHandler = (request, response) => {
 		if (data.action === 'init') {
 		    console.log("Initializing character");
 		    tama.init(response, data.fileName);
-		}
-		else {
-//		    console.log("Next day!");
-		    tama.handle(null, response);
+		} else {
+		    //		    console.log("Next day!");
+		    let userinput = data.userinput;
+		    if (step++ < 4) {
+			userinput = "2";
+		    } else {
+			userinput = "str dex spi wis";
+		    }
+		    tama.handle(userinput, response);
 		}
 		response.end(JSON.stringify(data));
 	    }
