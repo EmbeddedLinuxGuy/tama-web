@@ -1,9 +1,16 @@
+ 20 make images clickable
+ 17 send class selection for chargen
+ 18 use serverless launcher (OpenWhisk, AWS Lambda, etc)
+ 19 server for static assets like .jpg, .js, .html
+ 15 make tama-text run non-interactively (1-shot)
+ 14 real data for character creation
  11 Replace filename widget with next button
   6 Move all global state data into external JSON
  13 tama routines return string instead of writing to tty
  
 done
 
+ 16 populate canvas with 4 images
   7 Move step into character JSON
  12 Send data to choose character class
   4 Replace + with string literal interpolation

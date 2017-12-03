@@ -31,6 +31,24 @@ function makeRequest() {
     action = 'next';
     // alert('Action is now: ' + action);
 }
+var canvas;
+var ctx;
+
 var init  = function() {
-document.getElementById("loadchar").onclick = makeRequest;
+    document.getElementById("loadchar").onclick = makeRequest;
+
+    canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+    canvas.width = 800;
+    canvas.height = 200;
+
+    //    var imgs = new Array(4);
+    var nums = [1, 2, 3, 4];
+    nums.map(function (i) {
+	let img = new Image();
+	img.src = `${i}.jpg`;
+	(function (imgarg, posarg) {
+	    img.onload = () => ctx.drawImage(imgarg, posarg, 0);
+	})(img, 200*(i-1));
+    });
 }

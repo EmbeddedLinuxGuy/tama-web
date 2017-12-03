@@ -39,6 +39,11 @@ const requestHandler = (request, response) => {
 	if (request.url === '/tama-browser.js') {
 	    console.log("serving javascript");
 	    response.end(fs.readFileSync("tama-browser.js"));
+	} else if (request.url === '/1.jpg'
+		   || request.url === '/2.jpg'
+		   || request.url === '/3.jpg'
+		   || request.url === '/4.jpg') {
+	    response.end(fs.readFileSync(request.url.substring(1)));
 	} else {
 	    console.log(request.url);
 	    response.end(html_body);
