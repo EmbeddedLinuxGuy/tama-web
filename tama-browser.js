@@ -1,3 +1,5 @@
+var httpRequest;
+
 function displayContents() {
   try {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
@@ -34,7 +36,7 @@ function makeRequest() {
 var canvas;
 var ctx;
 
-var init  = function() {
+var init = function() {
     document.getElementById("loadchar").onclick = makeRequest;
 
     canvas = document.getElementById("canvas");
@@ -42,7 +44,6 @@ var init  = function() {
     canvas.width = 800;
     canvas.height = 200;
 
-    //    var imgs = new Array(4);
     var nums = [1, 2, 3, 4];
     nums.map(function (i) {
 	let img = new Image();
@@ -51,4 +52,11 @@ var init  = function() {
 	    img.onload = () => ctx.drawImage(imgarg, posarg, 0);
 	})(img, 200*(i-1));
     });
+
+    canvas.addEventListener('click', function() {
+	let x = event.pageX - canvas.offsetLeft;
+	//let y = event.pageY - canvas.offsetTop;
+	let selection = Math.floor(x / canvas.width);
+	
+    }, false);
 }
