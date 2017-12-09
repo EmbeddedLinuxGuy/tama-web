@@ -1,10 +1,18 @@
+<!DOCTYPE html>
 <html>
-  <script src="tama-browser.js"></script>
+  <head>
+    <meta charset="utf-8"/>
+    <title>tama</title>
+    <script src="tama-browser.js"></script>
+  </head>
   <body onload="init()">
     <h1>Welcome to Tama-Yaru</h1>
-    <input type="text" id="filename"></input>
-    <button id="loadchar">enter filename</button>
+    <div id="startwidget">
+      <input type="text" id="filename">
+      <button id="loadchar">enter filename</button>
+    </div>
     <canvas id="canvas"></canvas>
-    <pre id="log" />
+    <button id="next">Next</button>
+    <pre id="log"></pre>
   </body>
 </html>
