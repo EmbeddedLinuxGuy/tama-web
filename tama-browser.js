@@ -1,10 +1,20 @@
 var httpRequest;
+var filename;
+var userinput = "2";
 
 function displayContents() {
-  try {
-    if (httpRequest.readyState === XMLHttpRequest.DONE) {
-      if (httpRequest.status === 200) {
-          document.getElementById("log").innerHTML = httpRequest.responseText + document.getElementById("log").innerHTML;
+    try {
+	if (httpRequest.readyState === XMLHttpRequest.DONE) {
+	    if (httpRequest.status === 200) {
+		let lines = httpRequest.responseText.split('\n');
+		if (lines[1].slice(0, 18) == "Arrange your stats") {
+		    //alert(userinput);
+		    document.getElementById("next").onclick = function (e) {
+			userinput = "str dex spi wis";
+			xhr();
+		    };
+		};
+		document.getElementById("log").innerHTML = lines.join('\n') + document.getElementById("log").innerHTML;
       } else {
         alert('There was a problem with the request.');
       }
@@ -16,30 +26,44 @@ function displayContents() {
 
 var action = 'init';
 
-function makeRequest() {
+function xhr(params) {
+    if (params) {
+	params += `&fileName=${encodeURIComponent(fileName)}`;
+    } else {
+	params = `fileName=${encodeURIComponent(fileName)}`;
+    }
+    params += `&userinput=${encodeURIComponent(userinput)}`;
     httpRequest = new XMLHttpRequest();
-
     if (!httpRequest) {
       alert('Giving up :( Cannot create an XMLHTTP instance');
       return false;
     }
+    httpRequest.overrideMimeType("text/plain");
     httpRequest.onreadystatechange = displayContents;
-    let url = 'test.html';
-
+    let url = 'test-endpoint';
     httpRequest.open('POST', url);
     httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    let fileName = document.getElementById("filename").value;
-    httpRequest.send(`fileName=${encodeURIComponent(fileName)}&action=${action}`);
-    action = 'next';
-    // alert('Action is now: ' + action);
+    httpRequest.send(params);
 }
+
+// handler 
+function makeRequest(event) { //, userinput) {
+    fileName = document.getElementById("filename").value;
+    let params = `action=${action}`;
+    xhr(params);
+    action = 'next';
+    canvas.style.visibility = "visible";
+    document.getElementById("startwidget").style.display = "none";
+}
+
+
 var canvas;
 var ctx;
 
 var init = function() {
-    document.getElementById("loadchar").onclick = makeRequest;
-
+    document.getElementById("next").style.visibility = "hidden";
     canvas = document.getElementById("canvas");
+    canvas.style.visibility = "hidden";
     ctx = canvas.getContext("2d");
     canvas.width = 800;
     canvas.height = 200;
@@ -53,10 +77,18 @@ var init = function() {
 	})(img, 200*(i-1));
     });
 
-    canvas.addEventListener('click', function() {
+    canvas.addEventListener('click', function(event) {
+	// XXX is x 0-799 or 1-800?
 	let x = event.pageX - canvas.offsetLeft;
 	//let y = event.pageY - canvas.offsetTop;
-	let selection = Math.floor(x / canvas.width);
-	
+	userinput = 1 + Math.floor(4 * x / canvas.width);
+	xhr();
+	document.getElementById("next").style.visibility = "visible";
+	document.getElementById("next").onclick = function (event) {
+	    xhr();
+	};
+	canvas.style.visibility = "hidden";
     }, false);
+
+    document.getElementById("loadchar").onclick = makeRequest;
 }
